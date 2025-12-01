@@ -7,21 +7,21 @@ export const projects: Project[] = [
     id: 1,
     title: 'Delivery Coffee',
     category: 'E-commerce / Web App',
-    imageUrl: '/portfolio/components/1234.png',        // ← только путь к файлу
+    imageUrl: '/1234.png',
     link: 'https://deliverycoffee.ru/'
   },
   {
     id: 2,
     title: 'Personal Blog',
     category: 'Development / Portfolio',
-    imageUrl: '/portfolio/components/12345.png',
+    imageUrl: '/12345.png',
     link: 'https://spookyy12.github.io/blog/#'
   },
   {
     id: 3,
     title: 'Visual Experiments',
     category: 'Creative Coding',
-    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&auto=format&fit=crop',
+    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop',
     link: '#'
   }
 ];
@@ -53,14 +53,15 @@ interface ProjectSlideProps {
 }
 
 export const ProjectSlide: React.FC<ProjectSlideProps> = ({ project, index, total }) => {
-  // Правильно формируем URL с параметрами (используем ? если это наш файл)
-  const isLocalImage = project.imageUrl.startsWith('/portfolio/');
-  const baseUrl = isLocalImage ? project.imageUrl : project.imageUrl;
-
-  const src = isLocalImage ? `${baseUrl}?w=1920` : `${baseUrl}&w=1920`;
-  const srcSet = isLocalImage
-    ? `${baseUrl}?w=600 600w, ${baseUrl}?w=1200 1200w, ${baseUrl}?w=1920 1920w`
-    : `${baseUrl}&w=600 600w, ${baseUrl}&w=1200 1200w, ${baseUrl}&w=1920 1920w`;
+  // Проверяем, является ли изображение с Unsplash
+  const isUnsplashImage = project.imageUrl.includes('unsplash');
+  
+  const src = project.imageUrl;
+  
+  // srcSet только для Unsplash изображений (для локальных файлов не нужен)
+  const srcSet = isUnsplashImage 
+    ? `${project.imageUrl}&w=600 600w, ${project.imageUrl}&w=1200 1200w, ${project.imageUrl}&w=1920 1920w`
+    : undefined;
 
   return (
     <article className="w-full h-full relative group overflow-hidden">
