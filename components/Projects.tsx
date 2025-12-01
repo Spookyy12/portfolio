@@ -8,14 +8,14 @@ export const projects: Project[] = [
     id: 1,
     title: 'Delivery Coffee',
     category: 'E-commerce / Web App',
-imageUrl: '/1234.png',
+    imageUrl: '/portfolio/1234.png',        // ← добавил /portfolio/
     link: 'https://deliverycoffee.ru/'
   },
   {
     id: 2,
     title: 'Personal Blog',
     category: 'Development / Portfolio',
-imageUrl: '/12345.png',
+    imageUrl: '/portfolio/12345.png',       // ← добавил /portfolio/
     link: 'https://spookyy12.github.io/blog/#'
   },
   {
