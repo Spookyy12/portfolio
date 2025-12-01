@@ -7,14 +7,14 @@ export const projects: Project[] = [
     id: 1,
     title: 'Delivery Coffee',
     category: 'E-commerce / Web App',
-    imageUrl: '/1234.png',
+    imageUrl: 'https://raw.githubusercontent.com/Spookyy12/portfolio/main/components/1234.png',
     link: 'https://deliverycoffee.ru/'
   },
   {
     id: 2,
     title: 'Personal Blog',
     category: 'Development / Portfolio',
-    imageUrl: '/12345.png',
+    imageUrl: 'https://raw.githubusercontent.com/Spookyy12/portfolio/main/components/12345.png',
     link: 'https://spookyy12.github.io/blog/#'
   },
   {
@@ -53,12 +53,13 @@ interface ProjectSlideProps {
 }
 
 export const ProjectSlide: React.FC<ProjectSlideProps> = ({ project, index, total }) => {
-  // Проверяем, является ли изображение с Unsplash
+  // Проверяем тип изображения
   const isUnsplashImage = project.imageUrl.includes('unsplash');
+  const isGitHubImage = project.imageUrl.includes('githubusercontent');
   
   const src = project.imageUrl;
   
-  // srcSet только для Unsplash изображений (для локальных файлов не нужен)
+  // srcSet только для Unsplash изображений
   const srcSet = isUnsplashImage 
     ? `${project.imageUrl}&w=600 600w, ${project.imageUrl}&w=1200 1200w, ${project.imageUrl}&w=1920 1920w`
     : undefined;
