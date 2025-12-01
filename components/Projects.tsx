@@ -21,7 +21,7 @@ export const projects: Project[] = [
     id: 3,
     title: 'Visual Experiments',
     category: 'Creative Coding',
-    imageUrl: 'https://raw.githubusercontent.com/Spookyy12/portfolio/main/components/12345.png',
+    imageUrl: 'https://raw.githubusercontent.com/Spookyy12/portfolio/main/components/123456.png',
     link: '#'
   }
 ];
