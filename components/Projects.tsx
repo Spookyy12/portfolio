@@ -7,14 +7,14 @@ export const projects: Project[] = [
     id: 1,
     title: 'Delivery Coffee',
     category: 'E-commerce / Web App',
-    imageUrl: '/portfolio/1234.png',        // ← только путь к файлу
+    imageUrl: '/portfolio/components/1234.png',        // ← только путь к файлу
     link: 'https://deliverycoffee.ru/'
   },
   {
     id: 2,
     title: 'Personal Blog',
     category: 'Development / Portfolio',
-    imageUrl: '/portfolio/12345.png',
+    imageUrl: '/portfolio/components/12345.png',
     link: 'https://spookyy12.github.io/blog/#'
   },
   {
