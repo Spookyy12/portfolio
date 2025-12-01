@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alex Lavru - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+            colors: {
+              primary: '#1a1a1a',
+              secondary: '#ffffff',
+              accent: '#d4bbb0',
+              textLight: '#666666',
+              bgLight: '#f9f9f9',
+            },
+            keyframes: {
+              slideUp: {
+                '0%': { transform: 'translateY(100%)' },
+                '100%': { transform: 'translateY(0)' },
+              },
+              fadeInRight: {
+                '0%': { opacity: '0', transform: 'translateX(30px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' },
+              },
+            },
+            animation: {
+              slideUp: 'slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              fadeInRight: 'fadeInRight 0.8s ease-out forwards',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow: hidden;
+        height: 100vh;
+        width: 100vw;
+        background-color: #f0f0f0;
+      }
+      
+      /* 3D Book Effect Container */
+      .perspective-container {
+        perspective: 1500px;
+        perspective-origin: 50% 50%;
+      }
+
+      /* Individual Page Styles */
+      .book-page {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform-origin: 0% 50%; /* Pivot from the left spine */
+        transform-style: preserve-3d;
+        transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1.000), opacity 1.2s ease;
+        will-change: transform;
+        background-color: white;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.1); 
+      }
+      
+      /* Shadow Overlay for depth */
+      .book-page::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, rgba(0,0,0,0.2), transparent 40%);
+        opacity: 0;
+        transition: opacity 1.2s ease;
+        pointer-events: none;
+      }
+
+      /* State: Page is turned (flipped to left) */
+      .book-page.flipped {
+        transform: rotateY(-110deg);
+        opacity: 0; /* Transparency added here */
+        pointer-events: none;
+      }
+      
+      /* Darken the page as it flips to simulate lighting */
+      .book-page.flipped::after {
+        opacity: 1;
+      }
+
+      /* State: Page is active (visible) */
+      .book-page.active {
+        transform: rotateY(0deg);
+        opacity: 1;
+      }
+      
+      .line-mask {
+        overflow: hidden;
+        display: block;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4",
+    "path": "https://aistudiocdn.com/path@^0.12.7",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root" class="h-full w-full perspective-container"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
