@@ -21,7 +21,7 @@ export const projects: Project[] = [
     id: 3,
     title: 'Visual Experiments',
     category: 'Creative Coding',
-    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop',
+    imageUrl: 'https://raw.githubusercontent.com/Spookyy12/portfolio/main/components/12345.png',
     link: '#'
   }
 ];
