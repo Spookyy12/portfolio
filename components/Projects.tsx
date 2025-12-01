@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Project } from '../types';
 import FadeInSection from './ui/FadeInSection';
@@ -8,14 +7,14 @@ export const projects: Project[] = [
     id: 1,
     title: 'Delivery Coffee',
     category: 'E-commerce / Web App',
-    imageUrl: '/portfolio/1234.png',        // ← добавил /portfolio/
+    imageUrl: '/portfolio/1234.png',        // ← только путь к файлу
     link: 'https://deliverycoffee.ru/'
   },
   {
     id: 2,
     title: 'Personal Blog',
     category: 'Development / Portfolio',
-    imageUrl: '/portfolio/12345.png',       // ← добавил /portfolio/
+    imageUrl: '/portfolio/12345.png',
     link: 'https://spookyy12.github.io/blog/#'
   },
   {
@@ -54,31 +53,29 @@ interface ProjectSlideProps {
 }
 
 export const ProjectSlide: React.FC<ProjectSlideProps> = ({ project, index, total }) => {
-  // Construct srcset for responsive loading
-  // Mobile (600w), Tablet (1200w), Desktop (original/1920w)
-  const srcSet = `
-    ${project.imageUrl}&w=600 600w,
-    ${project.imageUrl}&w=1200 1200w,
-    ${project.imageUrl}&w=1920 1920w
-  `;
+  // Правильно формируем URL с параметрами (используем ? если это наш файл)
+  const isLocalImage = project.imageUrl.startsWith('/portfolio/');
+  const baseUrl = isLocalImage ? project.imageUrl : project.imageUrl;
+
+  const src = isLocalImage ? `${baseUrl}?w=1920` : `${baseUrl}&w=1920`;
+  const srcSet = isLocalImage
+    ? `${baseUrl}?w=600 600w, ${baseUrl}?w=1200 1200w, ${baseUrl}?w=1920 1920w`
+    : `${baseUrl}&w=600 600w, ${baseUrl}&w=1200 1200w, ${baseUrl}&w=1920 1920w`;
 
   return (
     <article className="w-full h-full relative group overflow-hidden">
-      {/* Background Image */}
       <div className="absolute inset-0 bg-gray-900">
-         <img
-          src={`${project.imageUrl}&w=1920`}
+        <img
+          src={src}
           srcSet={srcSet}
           sizes="(max-width: 768px) 100vw, 100vw"
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105 opacity-90"
-          loading="eager" 
+          loading="eager"
         />
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-500" />
       </div>
 
-      {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-end p-8 md:p-24 text-white">
         <FadeInSection delay="0.2s">
           <div className="border-l-2 border-white pl-6 md:pl-8">
@@ -86,24 +83,17 @@ export const ProjectSlide: React.FC<ProjectSlideProps> = ({ project, index, tota
             <h3 className="text-3xl md:text-6xl font-bold mb-6">{project.title}</h3>
             
             {project.link && project.link !== '#' ? (
-              <a 
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-sm font-semibold uppercase tracking-wider hover:underline decoration-1 underline-offset-4"
-              >
-                View Project ↗
+              <a href={project.link} target="_blank" rel="noopener noreferrer"
+                className="inline-block text-sm font-semibold uppercase tracking-wider hover:underline decoration-1 underline-offset-4">
+                View Project →
               </a>
             ) : (
-              <span className="text-sm font-semibold uppercase tracking-wider opacity-60">
-                Coming Soon
-              </span>
+              <span className="text-sm font-semibold uppercase tracking-wider opacity-60">Coming Soon</span>
             )}
           </div>
         </FadeInSection>
       </div>
-      
-      {/* Project Counter */}
+
       <div className="absolute top-24 right-8 md:right-24 text-white/50 font-mono text-xl md:text-2xl">
         0{index + 1} <span className="text-white/20">/ 0{total}</span>
       </div>
