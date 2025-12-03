@@ -148,11 +148,11 @@ const App: React.FC = () => {
         })}
       </main>
       
-      {/* Side Navigation Arrows */}
+      {/* Side Navigation Arrows - Larger on mobile */}
       <button 
         onClick={prevPage}
         disabled={currentPage === 0}
-        className={`fixed left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/50 mix-blend-difference text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-transparent transition-all disabled:opacity-0 disabled:cursor-not-allowed cursor-pointer`}
+        className={`fixed left-0 md:left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-20 md:w-16 md:h-16 rounded-r-xl md:rounded-full border-y border-r border-white/30 bg-black/10 md:bg-transparent md:border border-white/50 mix-blend-difference text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-transparent transition-all disabled:opacity-0 disabled:cursor-not-allowed cursor-pointer active:scale-95`}
         aria-label="Previous Page"
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8">
@@ -163,7 +163,7 @@ const App: React.FC = () => {
       <button 
         onClick={nextPage}
         disabled={currentPage === totalPages - 1}
-        className={`fixed right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 md:w-16 md:h-16 rounded-full border border-white/50 mix-blend-difference text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-transparent transition-all disabled:opacity-0 disabled:cursor-not-allowed cursor-pointer`}
+        className={`fixed right-0 md:right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-20 md:w-16 md:h-16 rounded-l-xl md:rounded-full border-y border-l border-white/30 bg-black/10 md:bg-transparent md:border border-white/50 mix-blend-difference text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-transparent transition-all disabled:opacity-0 disabled:cursor-not-allowed cursor-pointer active:scale-95`}
          aria-label="Next Page"
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8">

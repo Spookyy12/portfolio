@@ -4,7 +4,7 @@ import FadeInSection from './ui/FadeInSection';
 
 const Contact: React.FC = () => {
   return (
-    <section id="contact" className="w-screen h-full flex items-center justify-center px-8 md:px-24 flex-shrink-0 bg-black text-white snap-start relative overflow-hidden">
+    <section id="contact" className="w-screen h-full flex items-center justify-center px-4 md:px-24 flex-shrink-0 bg-black text-white snap-start relative overflow-hidden">
       
       {/* Animated Aurora Background */}
       <div className="absolute inset-0 z-0 opacity-60">
@@ -14,14 +14,14 @@ const Contact: React.FC = () => {
 
       <div className="max-w-4xl w-full text-center relative z-10">
         <FadeInSection>
-          <h2 className="text-sm uppercase tracking-widest text-gray-400 mb-8">Contact</h2>
-          <h3 className="text-3xl md:text-5xl font-light mb-16">Let's work together</h3>
+          <h2 className="text-xs md:text-sm uppercase tracking-widest text-gray-400 mb-6 md:mb-8">Contact</h2>
+          <h3 className="text-2xl md:text-5xl font-light mb-8 md:mb-16">Let's work together</h3>
         </FadeInSection>
 
         <FadeInSection delay="0.1s">
           <a
             href="mailto:alexlavru60@mail.com"
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight hover:text-indigo-300 transition-colors duration-300 block mb-24 break-all sm:break-normal"
+            className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight hover:text-indigo-300 transition-colors duration-300 block mb-12 md:mb-24 break-all md:break-words px-2"
           >
             alexlavru60@mail.com
           </a>
@@ -29,9 +29,9 @@ const Contact: React.FC = () => {
         
         {/* Footer Info Merged */}
         <FadeInSection delay="0.2s">
-            <div className="flex flex-col items-center gap-6 mt-12">
-                <div className="h-[1px] w-24 bg-white/20"></div>
-                <div className="text-xs tracking-widest uppercase text-white/40">
+            <div className="flex flex-col items-center gap-4 md:gap-6 mt-8 md:mt-12">
+                <div className="h-[1px] w-16 md:w-24 bg-white/20"></div>
+                <div className="text-[10px] md:text-xs tracking-widest uppercase text-white/40">
                 © {new Date().getFullYear()} Alex Lavru. All rights reserved.
                 </div>
             </div>
