@@ -2,12 +2,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import Services from './components/Services';
 import { ProjectsIntro, ProjectSlide, projects } from './components/Projects';
 import About from './components/About';
 import Contact from './components/Contact';
 import Final from './components/Final';
+import CustomCursor from './components/CustomCursor';
+import { LanguageProvider } from './contexts/LanguageContext';
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const lastScrollTime = React.useRef(0);
   const SCROLL_COOLDOWN = 1200; // ms
@@ -15,6 +18,7 @@ const App: React.FC = () => {
   // Define our "Pages" in order
   const pageComponents = [
     <Hero key="hero" />,
+    <Services key="services" />, // NEW Services Page
     <ProjectsIntro key="projects-intro" />,
     ...projects.map((p, i) => (
       <ProjectSlide key={`project-${p.id}`} project={p} index={i} total={projects.length} />
@@ -26,10 +30,12 @@ const App: React.FC = () => {
 
   const totalPages = pageComponents.length;
 
+  // Calculate indices for navigation
   const sectionIndices = {
-    work: 1,
-    about: 2 + projects.length, 
-    contact: 3 + projects.length,
+    services: 1, // Services Page
+    work: 2, // ProjectsIntro
+    about: 2 + projects.length + 1, // Hero(1) + Services(1) + Intro(1) + Projects
+    contact: 2 + projects.length + 1 + 1, // About + 1
   };
 
   const nextPage = useCallback(() => {
@@ -73,7 +79,6 @@ const App: React.FC = () => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
       
-      // Much lower threshold (5) means it responds to gentle scrolls
       if (Math.abs(e.deltaY) > 5) {
         if (e.deltaY > 0) {
           nextPage();
@@ -118,12 +123,15 @@ const App: React.FC = () => {
 
   return (
     <div className="h-full w-full bg-gray-100 overflow-hidden relative">
+      <CustomCursor />
+      
       <Header 
         onNavigate={(idx) => {
           setCurrentPage(idx);
           lastScrollTime.current = Date.now();
         }} 
-        sectionIndices={sectionIndices} 
+        sectionIndices={sectionIndices}
+        currentPage={currentPage}
       />
       
       {/* Main Book Container */}
@@ -134,7 +142,7 @@ const App: React.FC = () => {
           let stateClass = '';
           if (index < currentPage) stateClass = 'flipped';
           else if (index === currentPage) stateClass = 'active';
-          else stateClass = 'active'; // Future pages wait in the stack
+          else stateClass = 'active'; 
 
           return (
             <div 
@@ -148,14 +156,14 @@ const App: React.FC = () => {
         })}
       </main>
       
-      {/* Side Navigation Arrows - Larger on mobile */}
+      {/* Side Navigation Arrows */}
       <button 
         onClick={prevPage}
         disabled={currentPage === 0}
-        className={`fixed left-0 md:left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-20 md:w-16 md:h-16 rounded-r-xl md:rounded-full border-y border-r border-white/30 bg-black/10 md:bg-transparent md:border border-white/50 mix-blend-difference text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-transparent transition-all disabled:opacity-0 disabled:cursor-not-allowed cursor-pointer active:scale-95`}
+        className={`fixed left-0 md:left-4 top-1/2 -translate-y-1/2 z-50 w-16 h-24 md:w-16 md:h-16 rounded-r-xl md:rounded-full border-y border-r border-white/30 bg-black/20 md:bg-transparent md:border border-white/50 mix-blend-difference text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-transparent transition-all disabled:opacity-0 disabled:cursor-not-allowed cursor-pointer active:scale-95 backdrop-blur-sm md:backdrop-blur-none`}
         aria-label="Previous Page"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
           <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
         </svg>
       </button>
@@ -163,10 +171,10 @@ const App: React.FC = () => {
       <button 
         onClick={nextPage}
         disabled={currentPage === totalPages - 1}
-        className={`fixed right-0 md:right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-20 md:w-16 md:h-16 rounded-l-xl md:rounded-full border-y border-l border-white/30 bg-black/10 md:bg-transparent md:border border-white/50 mix-blend-difference text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-transparent transition-all disabled:opacity-0 disabled:cursor-not-allowed cursor-pointer active:scale-95`}
+        className={`fixed right-0 md:right-4 top-1/2 -translate-y-1/2 z-50 w-16 h-24 md:w-16 md:h-16 rounded-l-xl md:rounded-full border-y border-l border-white/30 bg-black/20 md:bg-transparent md:border border-white/50 mix-blend-difference text-white flex items-center justify-center hover:bg-white hover:text-black hover:border-transparent transition-all disabled:opacity-0 disabled:cursor-not-allowed cursor-pointer active:scale-95 backdrop-blur-sm md:backdrop-blur-none`}
          aria-label="Next Page"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 md:w-8 md:h-8">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
           <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
         </svg>
       </button>
@@ -184,5 +192,11 @@ const App: React.FC = () => {
     </div>
   );
 };
+
+const App: React.FC = () => (
+  <LanguageProvider>
+    <AppContent />
+  </LanguageProvider>
+);
 
 export default App;

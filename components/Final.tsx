@@ -1,14 +1,17 @@
 
 import React from 'react';
 import FadeInSection from './ui/FadeInSection';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface FinalProps {
   onRestart: () => void;
 }
 
 const Final: React.FC<FinalProps> = ({ onRestart }) => {
+  const { t } = useLanguage();
+
   return (
-    <section className="w-screen h-full flex flex-col items-center justify-center text-white px-8 snap-start relative overflow-hidden">
+    <section className="w-screen h-full flex flex-col items-center text-white px-8 snap-start relative overflow-hidden">
       
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
@@ -18,13 +21,14 @@ const Final: React.FC<FinalProps> = ({ onRestart }) => {
           className="w-full h-full object-cover"
         />
         {/* Dark Overlay for text readability */}
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-black/40"></div>
       </div>
 
-      <div className="relative z-10 text-center w-full max-w-4xl">
+      {/* Main Content Centered */}
+      <div className="relative z-10 flex-grow flex flex-col justify-center items-center w-full max-w-4xl">
         <FadeInSection>
-          <h2 className="text-4xl md:text-8xl font-bold mb-8 tracking-tighter">
-            Thank You
+          <h2 className="text-4xl md:text-8xl font-bold mb-8 tracking-tighter text-center">
+            {t('Thank You', 'Спасибо')}
           </h2>
           <div className="h-1 w-24 bg-white mx-auto mb-12"></div>
         </FadeInSection>
@@ -32,9 +36,9 @@ const Final: React.FC<FinalProps> = ({ onRestart }) => {
         <FadeInSection delay="0.2s">
           <button 
             onClick={onRestart}
-            className="group relative inline-flex items-center gap-3 text-lg md:text-xl font-medium text-white hover:text-gray-200 transition-colors py-4 px-8 border border-white/30 rounded-full hover:bg-white/10 hover:border-white transition-all duration-300 backdrop-blur-sm"
+            className="group relative inline-flex items-center gap-3 text-lg md:text-xl font-medium text-white hover:text-gray-200 transition-colors py-4 px-8 border border-white/30 rounded-full hover:bg-white/10 hover:border-white transition-all duration-300 backdrop-blur-sm mt-[5vh]"
           >
-            <span>Back to Top</span>
+            <span>{t('Back to Top', 'В начало')}</span>
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
               fill="none" 
@@ -47,10 +51,11 @@ const Final: React.FC<FinalProps> = ({ onRestart }) => {
             </svg>
           </button>
         </FadeInSection>
+      </div>
 
-        <div className="absolute bottom-[-20vh] left-0 right-0 text-center text-xs md:text-sm text-white/40 uppercase tracking-widest">
-          Alex Lavru Portfolio
-        </div>
+      {/* Footer Text - Static in flex flow to avoid overlap */}
+      <div className="relative z-10 pb-8 text-center text-xs md:text-sm text-white/40 uppercase tracking-widest shrink-0">
+        Alex Lavru Portfolio
       </div>
     </section>
   );

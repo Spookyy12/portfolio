@@ -1,8 +1,11 @@
 
 import React from 'react';
 import FadeInSection from './ui/FadeInSection';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Contact: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="contact" className="w-screen h-full flex items-center justify-center px-4 md:px-24 flex-shrink-0 bg-black text-white snap-start relative overflow-hidden">
       
@@ -14,8 +17,12 @@ const Contact: React.FC = () => {
 
       <div className="max-w-4xl w-full text-center relative z-10">
         <FadeInSection>
-          <h2 className="text-xs md:text-sm uppercase tracking-widest text-gray-400 mb-6 md:mb-8">Contact</h2>
-          <h3 className="text-2xl md:text-5xl font-light mb-8 md:mb-16">Let's work together</h3>
+          <h2 className="text-xs md:text-sm uppercase tracking-widest text-gray-400 mb-6 md:mb-8">
+            {t('Contact', 'Контакты')}
+          </h2>
+          <h3 className="text-xl md:text-5xl font-light mb-8 md:mb-16">
+            {t("Ready to start a project?", "Готовы начать проект?")}
+          </h3>
         </FadeInSection>
 
         <FadeInSection delay="0.1s">
@@ -32,7 +39,7 @@ const Contact: React.FC = () => {
             <div className="flex flex-col items-center gap-4 md:gap-6 mt-8 md:mt-12">
                 <div className="h-[1px] w-16 md:w-24 bg-white/20"></div>
                 <div className="text-[10px] md:text-xs tracking-widest uppercase text-white/40">
-                © {new Date().getFullYear()} Alex Lavru. All rights reserved.
+                © {new Date().getFullYear()} Alex Lavru. {t('All rights reserved.', 'Все права защищены.')}
                 </div>
             </div>
         </FadeInSection>
