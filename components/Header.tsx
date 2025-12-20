@@ -57,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigate, sectionIndices, currentPage
               onClick={(e) => handleNavClick(e, 'home')} 
               className="font-bold text-xl md:text-2xl tracking-tight hover:opacity-80 transition-opacity"
             >
-              Alex Lavru
+              Igor Petrov
             </a>
             <span className="text-xs font-mono opacity-70 hidden sm:inline-block">/ WP & REACT DEV</span>
           </div>
