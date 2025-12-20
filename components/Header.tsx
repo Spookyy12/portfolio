@@ -12,7 +12,7 @@ interface HeaderProps {
 
 const navLinks: NavLink[] = [
   { label: { en: 'Services', ru: 'Услуги' }, href: '#services', key: 'services' },
-  { label: { en: 'Work', ru: 'Портфолио' }, href: '#work', key: 'work' },
+  { label: { en: 'Work', ru: 'Портфолио ' }, href: '#work', key: 'work' },
   { label: { en: 'About', ru: 'Обо мне' }, href: '#about', key: 'about' },
   { label: { en: 'Contact', ru: 'Контакты' }, href: '#contact', key: 'contact' },
 ];
